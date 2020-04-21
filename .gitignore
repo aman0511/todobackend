@@ -1,0 +1,10 @@
+src/todobackend.egg-info
+.env
+*.pyc
+
+target/
+*.xml
+.idea
+.coverage
+db.sqlite3
+todobackend-specs/node_modules
