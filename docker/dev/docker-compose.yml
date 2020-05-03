@@ -22,14 +22,13 @@ builder:
   command: ["pip", "wheel", "--no-index", "-f /build", "."]
 
 agent:
-  image: aman/ansible
-  volumes:
-      - "../../ansible/probe.yml:/ansible/site.yml"
+  image: aman0511/ansible
   links:
     - db
   environment:
       PROBE_HOST: 'db'
       PROBE_PORT: 3306
+  command: ["probe.yml"]
 
 db:
   image: mysql:5.6
@@ -45,6 +44,5 @@ cache:
   volumes:
     - /tmp/cache:/cache
     - /build
-    - ../../target:/wheelhouse
     - ../../src:/application
   entrypoint: "true"

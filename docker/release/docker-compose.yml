@@ -32,24 +32,22 @@ db:
 
 
 nginx:
-  image: nginx
+  build: .
+  dockerfile: Dockerfile.nginx
   links:
     - app
-  volumes:
-    - ./todobackend.conf:/etc/nginx/conf.d/todobackend.conf
   ports:
     - 8000:8000
   volumes_from:
     - webroot
 agent:
-  image: aman/ansible
-  volumes:
-      - "../../ansible/probe.yml:/ansible/site.yml"
+  image: aman0511/ansible
   links:
     - db
   environment:
       PROBE_HOST: 'db'
       PROBE_PORT: 3306
+  command: ["probe.yml"]
 
 
 webroot:
